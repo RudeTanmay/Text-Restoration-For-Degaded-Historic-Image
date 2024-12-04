@@ -70,13 +70,13 @@ def main():
                 
                 # Missing Word Analysis
                 st.subheader("✨ Restored Text")
-               context_prompt = f""" You are an expert in analyzing text and predictiong missing words .Analyze this extracted text: '{extracted_text}'     
+                context_prompt = f""" You are an expert in analyzing text and predictiong missing words .Analyze this extracted text: '{extracted_text}'     
                 1. Check for missing/unclear words marked with '__' or '___'
                 2. Fix any spelling or typing errors
                 3. Fill blanks by analyzing context and surrounding words
                 4. Format output:
                 - If no issues: "Text is complete and clear: [original text]"
-                - If corrections needed: Show restored text with changes in **asterisks**"""
+                - If corrections needed: Show restored text with changes in **asterisks** """
                 restored_text = gemini_pro_missing_word(context_prompt)
                 st.write(restored_text)
                 
