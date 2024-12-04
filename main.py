@@ -43,11 +43,11 @@ def gemini_pro_missing_word(prompt):
 
 def main():
     configure_genai()
-    st.set_page_config(page_title="Text Extraction & Analysis", page_icon="📚", layout='centered')
+    st.set_page_config(page_title="Text Restoration ", page_icon="📚", layout='centered')
     
-    st.title("📝 Text Extraction & Restoration")
+    st.title("📝 Text Restoration of Degraded Images")
     
-    uploaded_image = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    uploaded_image = st.file_uploader("Upload any Degraded Historic image", type=["jpg", "jpeg", "png"])
     
     if uploaded_image:
         col1, col2 = st.columns([1, 1])
