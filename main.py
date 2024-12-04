@@ -60,7 +60,8 @@ def main():
         if st.button("Process Image"):
             with st.spinner("Processing..."):
                 # Extract Text
-                default_prompt = "Extract the text from the image. If the image is too blurred and very hard to read, then return 'Image is too noisy.'"
+                default_prompt =  """You are an expert in text extraction from degraded historical images. Extract all readable text, using '__' for unclear or noisy areas. Return everything you can extract, even if some parts are illegible. For severely blurred sections, leave blank spaces marked with '___'."""
+                extracted_text = gemini_flash_text_extraction(default_prompt, image)
                 extracted_text = gemini_flash_text_extraction(default_prompt, image)
                 
                 with col2:
@@ -69,7 +70,13 @@ def main():
                 
                 # Missing Word Analysis
                 st.subheader("✨ Restored Text")
-                context_prompt = f"Check the text for missing or unclear words and fix any typing mistakes. If no issues found, return 'Text is complete and clear' followed by the original text. Otherwise, identify missing/unclear words and provide the restored text with corrections highlighted in ** asterisks**.:'{extracted_text}'"
+               context_prompt = f""" You are an expert in analyzing text and predictiong missing words .Analyze this extracted text: '{extracted_text}'     
+                1. Check for missing/unclear words marked with '__' or '___'
+                2. Fix any spelling or typing errors
+                3. Fill blanks by analyzing context and surrounding words
+                4. Format output:
+                - If no issues: "Text is complete and clear: [original text]"
+                - If corrections needed: Show restored text with changes in **asterisks**"""
                 restored_text = gemini_pro_missing_word(context_prompt)
                 st.write(restored_text)
                 
